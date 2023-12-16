@@ -1,0 +1,35 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 10px;
+  border-bottom: 1px solid red;
+}
+.flex-row p {
+  margin: 0;
+  word-wrap: break-word;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+ul li {
+  margin: 0;
+}
+span {
+  display: flex;
+  justify-content: start;
+}
