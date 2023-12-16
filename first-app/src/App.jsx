@@ -36,6 +36,13 @@ function App() {
     }
   };
 
+  const handleDeleteItem = (name) => {
+    const updatedGroceryList = [...groceryItems].filter(
+      (item) => item.name !== name
+    );
+    setGroceryItems(updatedGroceryList);
+  };
+
   const renderGroceryList = () => {
     return groceryItems.map((item) => (
       <li key={item.name}>
@@ -46,7 +53,7 @@ function App() {
               {item.name} {item.quantity > 1 ? "x" + item.quantity : null}
             </p>
           </span>
-          <button>x</button>
+          <button onClick={() => handleDeleteItem(item.name)}>x</button>
         </div>
       </li>
     ));
