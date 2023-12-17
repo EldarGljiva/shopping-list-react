@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import shopping_cart_img from "./assets/shopping_cart.svg";
 import { render } from "ejs";
@@ -6,10 +6,27 @@ import { render } from "ejs";
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [groceryItems, setGroceryItems] = useState([]);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    determineCompletedStatus();
+  }, [groceryItems]);
 
   //giving inputValue whatever we enter inside input
   const handleChangeInputValue = (e) => {
     setInputValue(e.target.value);
+  };
+  const determineCompletedStatus = () => {
+    if (!groceryItems.length) {
+      return setIsCompleted(false);
+    }
+    let isAllCompleted = true;
+
+    groceryItems.forEach((item) => {
+      if (!item.completed) isAllCompleted = false;
+    });
+
+    setIsCompleted(isAllCompleted);
   };
   //if we press enter and we wrote anything inside input, meaning it's not empty then add it to array
   //BUT if name is repeating just increase quantity
@@ -31,7 +48,9 @@ function App() {
         } else {
           updatedGroceryList[itemIndex].quantity++;
         }
+        setInputValue("");
         setGroceryItems(updatedGroceryList);
+        determineCompletedStatus();
       }
     }
   };
@@ -41,15 +60,28 @@ function App() {
       (item) => item.name !== name
     );
     setGroceryItems(updatedGroceryList);
+    determineCompletedStatus();
+  };
+
+  const handleUpdateCompleteStatus = (status, index) => {
+    const updatedGroceryList = [...groceryItems];
+    updatedGroceryList[index].completed = status;
+    setGroceryItems(updatedGroceryList);
+    determineCompletedStatus();
   };
 
   const renderGroceryList = () => {
-    return groceryItems.map((item) => (
+    return groceryItems.map((item, index) => (
       <li key={item.name}>
         <div className="flex-row">
           <span>
-            <input type="checkbox" />
-            <p>
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                handleUpdateCompleteStatus(e.target.checked, index);
+              }}
+            />
+            <p className={item.completed ? "finished" : ""}>
               {item.name} {item.quantity > 1 ? "x" + item.quantity : null}
             </p>
           </span>
@@ -62,8 +94,8 @@ function App() {
   return (
     <main className="container">
       <div className="App">
-        <h4 className="success">You're done!</h4>
-        <h3>Shopping list</h3>
+        {isCompleted ? <h4 className="done">You're done</h4> : null}
+        <h3>Shopping List</h3>
         <img
           src={shopping_cart_img}
           alt="shopping cart image"

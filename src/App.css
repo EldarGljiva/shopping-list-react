@@ -1,0 +1,72 @@
+* {
+  font-family: "Chelsea Market", cursive;
+}
+body {
+  background-color: #fef6e4;
+}
+button {
+  background-color: #f582ae;
+  color: #001858;
+  border-style: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  max-width: 300px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 10px;
+  border-bottom: 1px solid #f3d2c1;
+}
+.flex-row p {
+  margin: 0;
+  word-wrap: break-word;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+ul li {
+  margin: 0;
+}
+span {
+  display: flex;
+  justify-content: start;
+}
+h3 {
+  color: #001858;
+}
+p {
+  color: #172c66;
+}
+.finished {
+  text-decoration: line-through;
+}
+input[type="checkbox"] {
+  accent-color: rgb(90, 153, 90);
+}
+input[type="text"] {
+  border: 2px solid #8bd3dd;
+  border-radius: 4px;
+}
+input[type="text"]:focus {
+  outline-color: #68a2a9;
+  border: 2.5px solid #68a2a9;
+}
+.done {
+  color: rgb(148, 218, 148);
+}
